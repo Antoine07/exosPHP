@@ -440,4 +440,6 @@ print_r(vigen_decode("DIU UIO K JMJGG UI YKMPW HG C EEQS GD ZQEX WOZCFMT JYIOVQ 
  * Romain 14
  * Antoine 13
  * Sophie 18.5
+ * 
+ * Et afficher le résulta dans un text avec une moyenne arrondi; utiliser la fonction round() 
  */
