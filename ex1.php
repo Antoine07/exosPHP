@@ -2,54 +2,59 @@
 
 function dump($results)
 {
-    echo '<pre>';
-    print_r($results);
-    echo '</pre>';
+    if (gettype($results) == 'string') {
+        echo $results;
+        echo PHP_EOL;
+    } else {
+        echo '<pre>';
+        print_r($results);
+        echo '</pre>';
+    }
 }
 
 /**
-* Boolean
-*/
+ * Boolean
+ */
 /*
 *  Exercise quelle valeur de boolean retourne les expressions suivantes
 */
 
 dump('test logique');
 
-$exp1 = (0!= 0 && 1/0 == 2) ;    
-dump($exp1? 'exp1 vrai' : 'exp1 faux');
+$exp1 = (0 != 0 && 1 / 0 == 2);
+dump($exp1 ? 'exp1 vrai' : 'exp1 faux');
 
-$exp2 = (!true || true) ;
-dump($exp2? 'exp2 vrai' : 'exp2 faux');
+$exp2 = (!true || true);
+dump($exp2 ? 'exp2 vrai' : 'exp2 faux');
 
-$exp3 = (!true || false) ;
-dump($exp3? 'exp3 vrai' : 'exp3 faux');
+$exp3 = (!true || false);
+dump($exp3 ? 'exp3 vrai' : 'exp3 faux');
 
-$exp4 = !(true || true) ;
-dump($exp4? 'exp4 vrai' : 'exp4 faux');
+$exp4 = !(true || true);
+dump($exp4 ? 'exp4 vrai' : 'exp4 faux');
 
 $exp5 = (true || false) && false;
-dump($exp5? 'exp5 vrai' : 'exp5 faux');
+dump($exp5 ? 'exp5 vrai' : 'exp5 faux');
 
 $exp6 = (true || false) && true;
-dump($exp6? 'exp6 vrai' : 'exp6 faux');
+dump($exp6 ? 'exp6 vrai' : 'exp6 faux');
 
-$exp7 = (true || false) && ( (!false && true) || true );
-dump($exp7? 'exp7 vrai' : 'exp7 faux');
+$exp7 = (true || false) && ((!false && true) || true);
+dump($exp7 ? 'exp7 vrai' : 'exp7 faux');
 
-$exp8 = ((false || false) && (!false && false)) || true ;
-dump($exp8? 'exp8 vrai' : 'exp8 faux');
+$exp8 = ((false || false) && (!false && false)) || true;
+dump($exp8 ? 'exp8 vrai' : 'exp8 faux');
 
-$exp9 = (false || false) && (!false && false) || true ;
-dump($exp9? 'exp9 vrai' : 'exp9 faux');
+$exp9 = (false || false) && (!false && false) || true;
+dump($exp9 ? 'exp9 vrai' : 'exp9 faux');
 
-$exp10 = 3*3.5 > 10 ;
-$exp11 = 3*7  == 21 ;
-$exp12 = 3-1 >= 1;
-$exp13 = 0 < pow(2,10) == pow(2,10);
+$exp10 = 3 * 3.5 > 10;
+$exp11 = 3 * 7  == 21;
+$exp12 = 3 - 1 >= 1;
+$exp13 = 0 < pow(2, 10) == pow(2, 10);
 $exp14 = !(!true);
-$exp15 = (5.5*2 == 11 || 1/2 != .5) && (3%2 == 0);
-$exp16 = (5.5*2 == 11 || 1/2 != .5) && (3%2 != 0);
+$exp15 = (5.5 * 2 == 11 || 1 / 2 != .5) && (3 % 2 == 0);
+$exp16 = (5.5 * 2 == 11 || 1 / 2 != .5) && (3 % 2 != 0);
 
 /*
  * Exercise
@@ -80,7 +85,7 @@ echo $m;
  *
  */
 
-$array = [1,2,5,10,5,12,55,100,48,123,54];
+$array = [1, 2, 5, 10, 5, 12, 55, 100, 48, 123, 54];
 
 $num = $array[0];
 
@@ -137,7 +142,7 @@ for ($i = 3; $i <= $max; $i++) {
         $test[] = $p;
     }
     $num = count($test);
-    for ($j = 0; ($j < $num && ($i % $test[$j] != 0)); $j++) ;
+    for ($j = 0; ($j < $num && ($i % $test[$j] != 0)); $j++);
     if ($j == $num) $primary[] = $i;
 }
 
@@ -151,7 +156,7 @@ $max = 100;
 for ($i = 3; $i <= $max; $i++) {
 
     $num = count($primary);
-    for ($j = 0; ($j < $num && ($i % $primary[$j] != 0)); $j++) ;
+    for ($j = 0; ($j < $num && ($i % $primary[$j] != 0)); $j++);
     if ($j == $num) $primary[] = $i;
 }
 
@@ -165,9 +170,9 @@ dump($primary);
  */
 
 $n = 125;
-$fact=[];
-for ($i = 2; $i <= $n; $i++ ) {
-    while( $n % $i === 0 ) {
+$fact = [];
+for ($i = 2; $i <= $n; $i++) {
+    while ($n % $i === 0) {
         $fact[] = $i;
         $n = $n / $i;
     }
@@ -182,44 +187,41 @@ dump($fact);
 
 
 /**
-* exercise Calculer une puissance
-*/
+ * exercise Calculer une puissance
+ */
 
 function puissance(int $x, int $n)
 {
 
-    if($n == 0) 
+    if ($n == 0)
         return 1;
-    elseif($n == 1) 
+    elseif ($n == 1)
         return $x;
-    else 
-        return $x * puissance($x, $n-1);
-
+    else
+        return $x * puissance($x, $n - 1);
 }
 
-dump(puissance(2,20));
+dump(puissance(2, 20));
 
 // optimisation du calcul de puissance $x^2k = ($x^k*$x^k)^2 ou $x^(2k+1) = $x*$x^2k = $x*($x^k*$x^k)^2
 
 function puissance_opt(int $x, int $n)
 {
 
-    if($n == 0) 
+    if ($n == 0)
         return 1;
-    elseif($n == 1) 
+    elseif ($n == 1)
         return $x;
-    else 
-    {
+    else {
         // on peut factoriser $rec = puissance_opt($x, (int) $n/2);
-        if( $n%2 == 0) 
-            return puissance_opt($x, $n/2) * puissance_opt($x, $n/2);
+        if ($n % 2 == 0)
+            return puissance_opt($x, $n / 2) * puissance_opt($x, $n / 2);
         else
-            return $x * puissance_opt($x, ($n-1)/2) * puissance_opt($x, ($n-1)/2);
+            return $x * puissance_opt($x, ($n - 1) / 2) * puissance_opt($x, ($n - 1) / 2);
     }
-
 }
 
-dump(puissance_opt(2,20));
+dump(puissance_opt(2, 20));
 
 
 
@@ -228,14 +230,13 @@ dump(puissance_opt(2,20));
 */
 function f($x)
 {
-    return ((3*$x + 1) % 11) ;
+    return ((3 * $x + 1) % 11);
 }
 
 function g()
 {
-    $sum = 0 ;
-    for($i=0;$i<10;$i++)
-    {
+    $sum = 0;
+    for ($i = 0; $i < 10; $i++) {
         $d = f($i);
         $sum += 1 / $d;
     }
@@ -247,27 +248,26 @@ function g()
 g();
 
 /**
-* Exercise 
-* écrire une fonction qui calcule le maximun de trois valeurs, vous appelerez cette fonction max3($a,$b,$c)
-*/
+ * Exercise 
+ * écrire une fonction qui calcule le maximun de trois valeurs, vous appelerez cette fonction max3($a,$b,$c)
+ */
 
 function max3($a, $b, $c)
 {
-    $max = function($u, $v){
+    $max = function ($u, $v) {
 
-        if($u>$v) return $u;
+        if ($u > $v) return $u;
 
         return $v;
-
     };
 
     return $max($a, $max($b, $c));
 }
 
 
-dump(max3(10,2,3));
-dump(max3(1,20,3));
-dump(max3(1,2,30));
+dump(max3(10, 2, 3));
+dump(max3(1, 20, 3));
+dump(max3(1, 2, 30));
 
 /*
 * Exercise 
@@ -278,46 +278,44 @@ dump(max3(1,2,30));
 function search_dicto(int $elem, array $array)
 {
     $max = count($array);
-    $start = 0 ; $end = $max - 1;
-    while($start <= $end )
-    {
-        $middle = (int) (($start + $end)/2);
+    $start = 0;
+    $end = $max - 1;
+    while ($start <= $end) {
+        $middle = (int) (($start + $end) / 2);
 
-        if($elem == $array[$middle]) return $elem;
+        if ($elem == $array[$middle]) return $elem;
 
-        if( $elem > $array[$middle] ) $start = $middle + 1 ;
+        if ($elem > $array[$middle]) $start = $middle + 1;
 
         else $end = $middle - 1;
-
     }
 
     return 'none';
 }
 
 
-dump(search_dicto(520, [1,10,11,12,45,89,100,120,123,145,200,210,247,250,300,458,510,520]));
+dump(search_dicto(520, [1, 10, 11, 12, 45, 89, 100, 120, 123, 145, 200, 210, 247, 250, 300, 458, 510, 520]));
 
 /*
 * exercise crypto César décallage de l'ordre par position de lettre
 *
 */
 
-function char_rot($n,$c)
+function char_rot($n, $c)
 {
-	$code = ord($c);
-	// on ne traite pas cette plage de code dans la table ASCII
-	if($code < 64 || $code > 91) return;
-	
-	if($code > 96 && $code < 123)
-	{
-		$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
-	}
+    $code = ord($c);
+    // on ne traite pas cette plage de code dans la table ASCII
+    if ($code < 64 || $code > 91) return;
 
-	if($code > 64 && $code < 91){
-		$num = ( ($code - 65  + $n) % 26 ) + 65 ;
-	}
+    if ($code > 96 && $code < 123) {
+        $num = (($code - 97  + $n) % 26) + 97; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
+    }
 
-	return chr($num);
+    if ($code > 64 && $code < 91) {
+        $num = (($code - 65  + $n) % 26) + 65;
+    }
+
+    return chr($num);
 }
 
 // tests
@@ -326,19 +324,20 @@ echo '<pre>';
 print_r(char_rot(1, 'Z'));
 echo '</pre>';
 
-function cesear($num, $message){
-	$len = strlen($message);
-	$code = '';
+function cesear($num, $message)
+{
+    $len = strlen($message);
+    $code = '';
 
-	for ($i=0; $i <$len ; $i++) { 
-		$code .=  char_rot($num, $message[$i]);
-	}
+    for ($i = 0; $i < $len; $i++) {
+        $code .=  char_rot($num, $message[$i]);
+    }
 
-	return $code;
+    return $code;
 }
 
 echo '<pre>';
-print_r(cesear(2,'ABCDEFGHIJKLMNOPQRSTUVWXYZ'));
+print_r(cesear(2, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'));
 echo '</pre>';
 
 echo '<pre>';
@@ -346,20 +345,20 @@ print_r(cesear(2, strtolower('ABCDEFGHIJKLMNOPQRSTUVWXYZ')));
 echo '</pre>';
 
 /**
-* Exercicse crypt Vigenere sur les caractères majuscules
-*/
+ * Exercicse crypt Vigenere sur les caractères majuscules
+ */
 
 function char_vigen_encode($a, $b)
 {
-	return char_rot(ord($b) - 65, $a);
+    return char_rot(ord($b) - 65, $a);
 }
 
 function char_vigen_decode($a, $b)
 {
 
-	$num = 26 - (ord($b) - 65) ; // reculer
+    $num = 26 - (ord($b) - 65); // reculer
 
-	return char_rot($num, $a);
+    return char_rot($num, $a);
 }
 
 echo '<pre>';
@@ -374,44 +373,46 @@ echo '</pre>';
 // Dans l'absolu on peut faire qu'une fonction pour traiter l'encodage et décodage mais c'est trop technique pour l'instant alors comprenez déjà l'algo de ces deux fonctions et se sera très bien.
 function vigen_decode(string $str, string $key)
 {
-	$len = strlen($str);
-	$lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
+    $len = strlen($str);
+    $lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
 
-	$code = '';
-	$j = 0 ;
-	for ($i=0; $i < $len ; $i++) { 
+    $code = '';
+    $j = 0;
+    for ($i = 0; $i < $len; $i++) {
 
-	if($str[$i] == ' ') {
-		$code .= ' '; continue;
-	}
+        if ($str[$i] == ' ') {
+            $code .= ' ';
+            continue;
+        }
 
-	$code .= char_vigen_decode($str[$i], $key[$j % $lenKey]);
+        $code .= char_vigen_decode($str[$i], $key[$j % $lenKey]);
 
-	$j++;
-	}
+        $j++;
+    }
 
-	return $code;
+    return $code;
 }
 
 function vigen_encode(string $str, string $key)
 {
-	$len = strlen($str);
-	$lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
+    $len = strlen($str);
+    $lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
 
-	$code = '';
-	$j = 0 ;
-	for ($i=0; $i < $len ; $i++) { 
+    $code = '';
+    $j = 0;
+    for ($i = 0; $i < $len; $i++) {
 
-		if($str[$i] == ' ') {
-			$code .= ' '; continue;
-		}
+        if ($str[$i] == ' ') {
+            $code .= ' ';
+            continue;
+        }
 
-		$code .= char_vigen_encode($str[$i], $key[$j % $lenKey]);
+        $code .= char_vigen_encode($str[$i], $key[$j % $lenKey]);
 
-		$j++;
-	}
+        $j++;
+    }
 
-	return $code;
+    return $code;
 }
 
 echo '<pre>';
@@ -428,15 +429,3 @@ echo '</pre>';
 
 echo '<pre>';
 print_r(vigen_decode("DIU UIO K JMJGG UI YKMPW HG C EEQS GD ZQEX WOZCFMT JYIOVQ XSTKW", "SECRETKEY"));
-
-
-
-
-
-
-
-
-
-
-
-
